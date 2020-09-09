@@ -1,9 +1,11 @@
 package com.covengers.grouping.service;
 
+import com.covengers.grouping.component.FileUpload;
 import com.covengers.grouping.component.HashtagRecommender;
 import com.covengers.grouping.domain.Group;
 import com.covengers.grouping.domain.GroupHashtagMapping;
 import com.covengers.grouping.domain.Hashtag;
+import com.covengers.grouping.dto.SaveGroupImgRequestDto;
 import com.covengers.grouping.repository.GroupHashtagMappingRepository;
 import com.covengers.grouping.repository.GroupRepository;
 import com.covengers.grouping.repository.HashtagRepository;
@@ -31,6 +33,7 @@ public class GroupService {
     private final GroupRepository groupRepository;
     private final HashtagRepository hashtagRepository;
     private final GroupHashtagMappingRepository groupHashtagMappingRepository;
+    private final FileUpload fileUpload;
 
     @Transactional
     public GroupVo createGroup(CreateGroupRequestVo requestVo) {
@@ -47,10 +50,10 @@ public class GroupService {
 
         groupRepository.save(group);
 
-        for(String hashtagString : requestVo.getHashtagList()) {
+        for (String hashtagString : requestVo.getHashtagList()) {
             final Optional<Hashtag> optionalHashtag = hashtagRepository.findByHashtag(hashtagString);
 
-            if(optionalHashtag.isPresent()) {
+            if (optionalHashtag.isPresent()) {
                 continue;
             }
 
@@ -66,7 +69,13 @@ public class GroupService {
         return group.toVo();
     }
 
-    public RecommendGroupVo recommendGroup(String keyword){
+    public String saveGroupImg(SaveGroupImgRequestDto saveGroupImgRequestDto) {
+        String saveFileName = fileUpload.restore(saveGroupImgRequestDto.getGroupImg());
+        System.out.println(saveFileName);
+        return saveFileName;
+    }
+
+    public RecommendGroupVo recommendGroup(String keyword) {
 
         final RecommendHashtagVo recommendHashtagVo = hashtagRecommender.recommend(keyword);
 
@@ -75,7 +84,7 @@ public class GroupService {
         for (String hashtagString : recommendHashtagVo.getHashtagList()) {
             final Optional<Hashtag> hashtag = hashtagRepository.findByHashtag(hashtagString);
 
-            if(!hashtag.isPresent()) {
+            if (!hashtag.isPresent()) {
                 continue;
             }
 

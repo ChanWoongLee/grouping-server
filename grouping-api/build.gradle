@@ -34,7 +34,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     implementation 'io.springfox:springfox-swagger2:2.9.2'
     implementation 'io.springfox:springfox-swagger-ui:2.9.2'
-
+    compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
     implementation "org.deeplearning4j:deeplearning4j-ui:1.0.0-beta7"
     implementation "org.deeplearning4j:deeplearning4j-nlp:1.0.0-beta7"
     implementation "org.nd4j:nd4j-native:1.0.0-beta7"
