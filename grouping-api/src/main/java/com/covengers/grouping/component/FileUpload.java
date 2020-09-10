@@ -4,6 +4,7 @@ import com.covengers.grouping.constant.ResponseCode;
 import com.covengers.grouping.exception.CommonException;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +15,7 @@ import java.util.Calendar;
 public class FileUpload {
     private static final String SAVE_GROUP_IMAGE_PATH = "resources/groupimages/";
 
-    public String restore(String encodedImgString) {
+    public String imgRestore( MultipartFile groupImg) {
         try {
             byte[] decodedBytes = Base64.getDecoder().decode(encodedImgString);
             String saveFileName = createFileName();

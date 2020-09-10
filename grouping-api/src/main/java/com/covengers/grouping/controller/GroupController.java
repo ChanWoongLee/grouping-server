@@ -1,11 +1,7 @@
 package com.covengers.grouping.controller;
 
 import com.covengers.grouping.dto.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.covengers.grouping.component.CommonResponseMaker;
 import com.covengers.grouping.service.GroupService;
@@ -31,9 +27,9 @@ public class GroupController {
         return commonResponseMaker.makeSucceedCommonResponse(responseDto);
     }
 
-    @PostMapping("/group/img")
-    public String saveGroupImg(@RequestBody SaveGroupImgRequestDto saveGroupImgRequestDto) {
-        return groupService.saveGroupImg(saveGroupImgRequestDto);
+    @PostMapping("/group/{groupId}/img")
+    public String saveGroupImg(@PathVariable long groupId, @RequestParam MultipartFile groupImg) {
+        return groupService.saveGroupImg(groupId,groupImg);
     }
 
     @GetMapping("/group/keyword")
