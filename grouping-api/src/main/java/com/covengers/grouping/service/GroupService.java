@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -16,7 +15,6 @@ import com.covengers.grouping.component.HashtagRecommender;
 import com.covengers.grouping.domain.Group;
 import com.covengers.grouping.domain.GroupHashtagMapping;
 import com.covengers.grouping.domain.Hashtag;
-import com.covengers.grouping.dto.SaveGroupImgRequestDto;
 import com.covengers.grouping.repository.GroupHashtagMappingRepository;
 import com.covengers.grouping.repository.GroupRepository;
 import com.covengers.grouping.repository.HashtagRepository;
@@ -31,17 +29,7 @@ import com.covengers.grouping.vo.RecommendGroupVo;
 import com.covengers.grouping.vo.RecommendHashtagVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -104,8 +92,10 @@ public class GroupService {
     }
 
     public String saveGroupImg( long groupId,  MultipartFile groupImg) {
+
         String saveFileName = fileUpload.imgRestore(groupImg);
-        System.out.println(saveFileName);
+
+
         return saveFileName;
     }
 

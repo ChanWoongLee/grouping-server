@@ -15,12 +15,11 @@ import java.util.Calendar;
 public class FileUpload {
     private static final String SAVE_GROUP_IMAGE_PATH = "resources/groupimages/";
 
-    public String imgRestore( MultipartFile groupImg) {
+    public String imgRestore(MultipartFile groupImg) {
         try {
-            byte[] decodedBytes = Base64.getDecoder().decode(encodedImgString);
+            byte[] groupImgBytes = groupImg.getBytes();
             String saveFileName = createFileName();
-            System.out.println(saveFileName);
-            FileUtils.writeByteArrayToFile(new File(SAVE_GROUP_IMAGE_PATH + saveFileName), decodedBytes);
+            FileUtils.writeByteArrayToFile(new File(SAVE_GROUP_IMAGE_PATH + saveFileName), groupImgBytes);
             return saveFileName;
         } catch (IOException e) {
             throw new CommonException(ResponseCode.UNKNOWN_ERROR);

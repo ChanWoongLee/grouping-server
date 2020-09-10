@@ -35,6 +35,7 @@ public class UserGroupMapping extends AbstractAuditingEntity {
     @ManyToOne
     @JoinColumn(name = "grouping_user_id")
     private GroupingUser groupingUser;
+
     @ManyToOne
     @JoinColumn(name = "group_id")
     private Group group;

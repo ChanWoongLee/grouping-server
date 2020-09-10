@@ -29,7 +29,9 @@ public class GroupController extends AppApiV1Controller {
 
     @PostMapping("/group/{groupId}/img")
     public String saveGroupImg(@PathVariable long groupId, @RequestParam MultipartFile groupImg) {
+
         return groupService.saveGroupImg(groupId,groupImg);
+
     }
 
     @GetMapping("/group/keyword")
